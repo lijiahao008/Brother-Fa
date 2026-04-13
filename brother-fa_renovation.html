@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="费城发哥装修 - 大费城地区专业房屋装修与改造服务。厨房卫浴翻新、地板瓷砖、油漆、地下室改建。Fa Ge Renovation - Professional home renovation in Philadelphia."
+    />
+    <meta name="theme-color" content="#1a365d" />
+    <meta property="og:title" content="费城发哥装修 | Fa Ge Renovation" />
+    <meta
+      property="og:description"
+      content="大费城地区专业房屋装修与改造服务"
+    />
+    <meta property="og:type" content="website" />
+    <title>费城发哥装修 - 您的房屋改造专家 | Fa Ge Renovation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #1a365d;
+        --primary-light: #2a4a7f;
+        --accent: #dd6b20;
+        --accent-hover: #c05621;
+        --text: #1a202c;
+        --text-light: #718096;
+        --bg: #f7fafc;
+        --white: #ffffff;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+        --radius: 12px;
+        --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        font-family:
+          "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui,
+          sans-serif;
+        color: var(--text);
+        line-height: 1.7;
+        background-color: var(--bg);
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      /* ── Header ── */
+      header {
+        background-color: var(--primary);
+        color: var(--white);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: var(--shadow-md);
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0.875rem 1.25rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 900;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        letter-spacing: -0.5px;
+      }
+
+      .logo span {
+        color: var(--accent);
+      }
+
+      .nav-links {
+        display: none;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: color var(--transition);
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: width var(--transition);
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* ── Hamburger ── */
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 8px;
+        margin-right: -8px;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .hamburger span {
+        display: block;
+        width: 24px;
+        height: 2.5px;
+        background: var(--white);
+        border-radius: 2px;
+        transition: var(--transition);
+        transform-origin: center;
+      }
+
+      .hamburger.active span:nth-child(1) {
+        transform: translateY(7.5px) rotate(45deg);
+      }
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active span:nth-child(3) {
+        transform: translateY(-7.5px) rotate(-45deg);
+      }
+
+      /* ── Mobile Menu ── */
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--primary);
+        z-index: 999;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        opacity: 0;
+        transition: opacity var(--transition);
+      }
+
+      .mobile-menu.open {
+        display: flex;
+        opacity: 1;
+      }
+
+      .mobile-menu a {
+        color: var(--white);
+        font-size: 1.5rem;
+        font-weight: 700;
+        padding: 0.75rem 2rem;
+        transition: color var(--transition);
+      }
+
+      .mobile-menu a:hover,
+      .mobile-menu a:active {
+        color: var(--accent);
+      }
+
+      /* ── Hero ── */
+      .hero {
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+      }
+
+      .hero-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hero-bg::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(26, 54, 93, 0.85) 0%,
+          rgba(26, 54, 93, 0.6) 100%
+        );
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        padding: 5rem 1.5rem 3rem;
+        max-width: 720px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+        font-weight: 900;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .hero p {
+        font-size: 1.05rem;
+        margin-bottom: 2rem;
+        opacity: 0.95;
+        line-height: 1.8;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        background-color: var(--accent);
+        color: var(--white);
+        padding: 1rem 2rem;
+        font-size: 1.05rem;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition);
+        font-weight: 700;
+        font-family: inherit;
+        box-shadow: 0 4px 15px rgba(221, 107, 32, 0.4);
+      }
+
+      .cta-btn:hover {
+        background-color: var(--accent-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(221, 107, 32, 0.5);
+      }
+
+      .cta-btn:active {
+        transform: translateY(0);
+      }
+
+      /* ── Sections ── */
+      section {
+        padding: 3.5rem 1.25rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 1.75rem;
+        font-weight: 900;
+        margin-bottom: 2rem;
+        color: var(--primary);
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 4px;
+        background: var(--accent);
+        margin: 12px auto 0;
+        border-radius: 2px;
+      }
+
+      /* ── Services ── */
+      .services-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      .service-card {
+        background: var(--white);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        transition:
+          transform var(--transition),
+          box-shadow var(--transition);
+      }
+
+      .service-card:active {
+        transform: scale(0.98);
+      }
+
+      .service-img {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      .service-content {
+        padding: 1.25rem;
+      }
+
+      .service-content h3 {
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+
+      .service-content p {
+        color: var(--text-light);
+        font-size: 0.95rem;
+        line-height: 1.7;
+      }
+
+      /* ── About ── */
+      .about-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        background: var(--white);
+        padding: 1.5rem;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .about-text p {
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        color: var(--text);
+      }
+
+      .about-text strong {
+        color: var(--accent);
+      }
+
+      .about-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-top: 1.5rem;
+        text-align: center;
+      }
+
+      .stat-item h4 {
+        font-size: 2rem;
+        color: var(--accent);
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .stat-item p {
+        font-size: 0.85rem;
+        color: var(--text-light);
+        margin-top: 4px;
+      }
+
+      .about-img {
+        border-radius: var(--radius);
+        width: 100%;
+        height: 240px;
+        object-fit: cover;
+      }
+
+      /* ── Contact ── */
+      .contact-section {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-light) 100%
+        );
+        color: var(--white);
+        padding: 3.5rem 1.25rem;
+      }
+
+      .contact-section .section-title {
+        color: var(--white);
+      }
+
+      .contact-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .contact-card {
+        text-align: center;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .contact-icon {
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .contact-card h3 {
+        font-size: 1.15rem;
+        margin-bottom: 0.75rem;
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      .contact-card p {
+        font-size: 1.05rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .contact-card .sub {
+        font-size: 0.85rem;
+        opacity: 0.7;
+      }
+
+      .phone-link {
+        color: var(--white);
+        font-weight: 700;
+        font-size: 1.15rem;
+      }
+
+      .qr-code {
+        width: 140px;
+        height: 140px;
+        margin: 0.75rem auto;
+        border-radius: 8px;
+        background: var(--white);
+        padding: 4px;
+      }
+
+      /* ── Footer ── */
+      footer {
+        background-color: #0d1b36;
+        color: #8892b0;
+        text-align: center;
+        padding: 1.5rem 1.25rem;
+        font-size: 0.85rem;
+      }
+
+      /* ── Scroll Animations ── */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ── Tablet (>=640px) ── */
+      @media (min-width: 640px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1.15rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .services-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
+        }
+
+        .contact-container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .about-container {
+          padding: 2rem;
+        }
+
+        .about-img {
+          height: 300px;
+        }
+
+        section {
+          padding: 4rem 2rem;
+        }
+      }
+
+      /* ── Desktop (>=1024px) ── */
+      @media (min-width: 1024px) {
+        .nav-container {
+          padding: 1rem 2rem;
+        }
+
+        .logo {
+          font-size: 1.75rem;
+        }
+
+        .nav-links {
+          display: flex;
+        }
+
+        .hamburger {
+          display: none;
+        }
+
+        .hero h1 {
+          font-size: 3.25rem;
+        }
+
+        .hero p {
+          font-size: 1.3rem;
+        }
+
+        .section-title {
+          font-size: 2.5rem;
+          margin-bottom: 3rem;
+        }
+
+        .services-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
+        }
+
+        .service-card:hover {
+          transform: translateY(-8px);
+          box-shadow: var(--shadow-lg);
+        }
+
+        .service-img {
+          height: 220px;
+        }
+
+        .about-container {
+          flex-direction: row;
+          align-items: center;
+          gap: 3rem;
+          padding: 3rem;
+        }
+
+        .about-text {
+          flex: 1;
+        }
+
+        .about-img {
+          flex: 1;
+          height: 400px;
+          max-width: 480px;
+        }
+
+        .stat-item h4 {
+          font-size: 2.5rem;
+        }
+
+        section {
+          padding: 5rem 2rem;
+        }
+
+        .contact-section {
+          padding: 5rem 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <header>
+      <div class="nav-container">
+        <div class="logo">发哥<span>装修</span></div>
+        <nav class="nav-links">
+          <a href="#home">首页</a>
+          <a href="#services">服务项目</a>
+          <a href="#about">关于我们</a>
+          <a href="#contact">联系方式</a>
+        </nav>
+        <div
+          class="hamburger"
+          id="hamburger"
+          aria-label="菜单"
+          role="button"
+          tabindex="0"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#home">首页</a>
+      <a href="#services">服务项目</a>
+      <a href="#about">关于我们</a>
+      <a href="#contact">联系方式</a>
+    </div>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+      <div class="hero-bg">
+        <img
+          src="renovation-images/hero-renovation.jpg"
+          alt="精美厨房装修效果"
+          loading="eager"
+          width="1920"
+          height="1080"
+        />
+      </div>
+      <div class="hero-content">
+        <h1>大费城地区<br />专业房屋装修</h1>
+        <p>
+          发哥装修 —— 诚信为本，手艺精湛。<br />为您打造温馨舒适的理想家园。
+        </p>
+        <a href="#contact"><button class="cta-btn">免费评估报价</button></a>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+      <h2 class="section-title fade-up">我们的服务</h2>
+      <div class="services-grid">
+        <div class="service-card fade-up">
+          <img
+            src="renovation-images/kitchen-bathroom.jpg"
+            alt="厨房卫浴翻新"
+            class="service-img"
+            loading="lazy"
+            width="800"
+            height="400"
+          />
+          <div class="service-content">
+            <h3>厨房卫浴翻新</h3>
+            <p>
+              专业定制橱柜安装、台面更换、卫浴现代化改造、防水处理，让您的厨卫焕然一新。
+            </p>
+          </div>
+        </div>
+        <div class="service-card fade-up">
+          <img
+            src="renovation-images/flooring-tiles.jpg"
+            alt="地板瓷砖铺设"
+            class="service-img"
+            loading="lazy"
+            width="800"
+            height="400"
+          />
+          <div class="service-content">
+            <h3>地板瓷砖铺设</h3>
+            <p>
+              精修各类实木地板、复合地板安装，专业铺设花式瓷砖、大理石，做工细腻平整。
+            </p>
+          </div>
+        </div>
+        <div class="service-card fade-up">
+          <img
+            src="renovation-images/interior-painting.jpg"
+            alt="室内外专业油漆"
+            class="service-img"
+            loading="lazy"
+            width="800"
+            height="400"
+          />
+          <div class="service-content">
+            <h3>室内外专业油漆</h3>
+            <p>
+              选用环保无毒优质涂料，墙面修补打磨，室内外专业喷涂与粉刷，色彩持久亮丽。
+            </p>
+          </div>
+        </div>
+        <div class="service-card fade-up">
+          <img
+            src="renovation-images/basement-renovation.jpg"
+            alt="地下室精装改建"
+            class="service-img"
+            loading="lazy"
+            width="800"
+            height="400"
+          />
+          <div class="service-content">
+            <h3>地下室精装改建</h3>
+            <p>
+              将闲置地下室改造成家庭影院、娱乐室、客房或独立出租单位，合理规划空间与水电。
+            </p>
+          </div>
+        </div>
+        <div class="service-card fade-up">
+          <img
+            src="renovation-images/windows-exterior.jpg"
+            alt="门窗更换与外墙"
+            class="service-img"
+            loading="lazy"
+            width="800"
+            height="400"
+          />
+          <div class="service-content">
+            <h3>门窗更换与外墙</h3>
+            <p>
+              安装节能门窗，外墙壁板更换，屋顶局部维修，庭院地砖及围栏安装维护。
+            </p>
+          </div>
+        </div>
+        <div class="service-card fade-up">
+          <img
+            src="renovation-images/plumbing-electrical.jpg"
+            alt="水电布线与维修"
+            class="service-img"
+            loading="lazy"
+            width="800"
+            height="400"
+          />
+          <div class="service-content">
+            <h3>水电布线与维修</h3>
+            <p>
+              持有专业资质，解决各类水管漏水、电路老化问题，安全第一，排查隐患。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <h2 class="section-title fade-up">关于发哥装修</h2>
+      <div class="about-container fade-up">
+        <div class="about-text">
+          <p>
+            发哥装修（Brother Fa
+            Renovation）扎根于宾夕法尼亚州费城，多年来致力于为大费城及周边地区的华人社区提供最优质的房屋装修与改造服务。
+          </p>
+          <p>
+            无论您是想要翻新老旧的厨房卫浴、改建地下室，还是需要全屋整体装修，发哥带领的专业施工团队都能为您量身定制解决方案。我们深知在海外置业的不易，因此始终坚持<strong>"价格公道、透明报价、绝不偷工减料"</strong>的原则。
+          </p>
+          <p>我们承诺为您打造一个不仅美观，更兼具实用与安全的温馨家园。</p>
+          <div class="about-stats">
+            <div class="stat-item">
+              <h4>15+</h4>
+              <p>年行业经验</p>
+            </div>
+            <div class="stat-item">
+              <h4>500+</h4>
+              <p>完工项目</p>
+            </div>
+            <div class="stat-item">
+              <h4>100%</h4>
+              <p>客户满意度</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <div class="contact-section" id="contact">
+      <h2 class="section-title fade-up">联系我们</h2>
+      <div class="contact-container">
+        <div class="contact-card fade-up">
+          <div class="contact-icon">📞</div>
+          <h3>电话咨询</h3>
+          <p>
+            <a href="tel:+12672553842" class="phone-link">(267) 255-3842</a>
+          </p>
+          <p class="sub">周一至周日 8:00 AM - 8:00 PM</p>
+        </div>
+        <div class="contact-card fade-up">
+          <div class="contact-icon">💬</div>
+          <h3>微信联系</h3>
+          <p>发哥装修</p>
+          <img src="renovation-images/qr-code.png" alt="扫码添加微信" class="qr-code" width="220" height="220">
+          <p class="sub">扫码添加微信联系我们</p>
+        </div>
+        <div class="contact-card fade-up">
+          <div class="contact-icon">📍</div>
+          <h3>服务区域</h3>
+          <p>大费城地区 (Philadelphia)</p>
+          <p class="sub">及周边 NJ、DE 部分地区</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 费城发哥装修 (Fa Ge Renovation). 版权所有.</p>
+    </footer>
+
+    <script>
+      const hamburger = document.getElementById("hamburger");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const menuLinks = mobileMenu.querySelectorAll("a");
+
+      function toggleMenu() {
+        hamburger.classList.toggle("active");
+        mobileMenu.classList.toggle("open");
+        document.body.style.overflow = mobileMenu.classList.contains("open")
+          ? "hidden"
+          : "";
+      }
+
+      hamburger.addEventListener("click", toggleMenu);
+      hamburger.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          toggleMenu();
+        }
+      });
+
+      menuLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+          hamburger.classList.remove("active");
+          mobileMenu.classList.remove("open");
+          document.body.style.overflow = "";
+        });
+      });
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+      );
+
+      document.querySelectorAll(".fade-up").forEach(function (el) {
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>
