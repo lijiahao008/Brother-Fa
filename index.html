@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -57,6 +57,11 @@
         line-height: 1.7;
         background-color: var(--bg);
         overflow-x: hidden;
+      }
+
+      body.lang-en {
+        font-family: "Inter", "Helvetica Neue", system-ui, sans-serif;
+        line-height: 1.6;
       }
 
       a {
@@ -102,6 +107,12 @@
         color: var(--accent);
       }
 
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
       .nav-links {
         display: none;
         gap: 2rem;
@@ -127,6 +138,37 @@
 
       .nav-links a:hover::after {
         width: 100%;
+      }
+
+      /* ── Language Toggle ── */
+      .lang-toggle {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        padding: 3px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        flex-shrink: 0;
+      }
+
+      .lang-toggle button {
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: all var(--transition);
+        font-family: inherit;
+        line-height: 1;
+      }
+
+      .lang-toggle button.active {
+        background: var(--accent);
+        color: var(--white);
       }
 
       /* ── Hamburger ── */
@@ -606,40 +648,49 @@
     <!-- Navigation -->
     <header>
       <div class="nav-container">
-        <div class="logo">发哥<span>装修</span></div>
-        <nav class="nav-links">
-          <a href="#home">首页</a>
-          <a href="#services">服务项目</a>
-          <a href="#about">关于我们</a>
-          <a href="#contact">联系方式</a>
-        </nav>
-        <div
-          class="hamburger"
-          id="hamburger"
-          aria-label="菜单"
-          role="button"
-          tabindex="0"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
+        <div class="logo">
+          <span class="logo-zh">发哥</span
+          ><span class="logo-accent" data-i18n="logo_accent">装修</span>
+        </div>
+        <div class="nav-right">
+          <nav class="nav-links">
+            <a href="#home" data-i18n="nav_home">首页</a>
+            <a href="#services" data-i18n="nav_services">服务项目</a>
+            <a href="#about" data-i18n="nav_about">关于我们</a>
+            <a href="#contact" data-i18n="nav_contact">联系方式</a>
+          </nav>
+          <div class="lang-toggle" id="langToggle">
+            <button class="active" data-lang="zh">中</button>
+            <button data-lang="en">EN</button>
+          </div>
+          <div
+            class="hamburger"
+            id="hamburger"
+            aria-label="菜单"
+            role="button"
+            tabindex="0"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
       </div>
     </header>
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-      <a href="#home">首页</a>
-      <a href="#services">服务项目</a>
-      <a href="#about">关于我们</a>
-      <a href="#contact">联系方式</a>
+      <a href="#home" data-i18n="nav_home">首页</a>
+      <a href="#services" data-i18n="nav_services">服务项目</a>
+      <a href="#about" data-i18n="nav_about">关于我们</a>
+      <a href="#contact" data-i18n="nav_contact">联系方式</a>
     </div>
 
     <!-- Hero -->
     <section id="home" class="hero">
       <div class="hero-bg">
         <img
-          src="./hero-renovation.jpg"
+          src="renovation-images/hero-renovation.jpg"
           alt="精美厨房装修效果"
           loading="eager"
           width="1920"
@@ -647,21 +698,25 @@
         />
       </div>
       <div class="hero-content">
-        <h1>大费城地区<br />专业房屋装修</h1>
-        <p>
+        <h1 data-i18n="hero_title">大费城地区<br />专业房屋装修</h1>
+        <p data-i18n="hero_subtitle">
           发哥装修 —— 诚信为本，手艺精湛。<br />为您打造温馨舒适的理想家园。
         </p>
-        <a href="#contact"><button class="cta-btn">免费评估报价</button></a>
+        <a href="#contact"
+          ><button class="cta-btn" data-i18n="hero_cta">免费评估报价</button></a
+        >
       </div>
     </section>
 
     <!-- Services -->
     <section id="services">
-      <h2 class="section-title fade-up">我们的服务</h2>
+      <h2 class="section-title fade-up" data-i18n="services_title">
+        我们的服务
+      </h2>
       <div class="services-grid">
         <div class="service-card fade-up">
           <img
-            src="./kitchen-bathroom.jpg"
+            src="renovation-images/kitchen-bathroom.jpg"
             alt="厨房卫浴翻新"
             class="service-img"
             loading="lazy"
@@ -669,15 +724,15 @@
             height="400"
           />
           <div class="service-content">
-            <h3>厨房卫浴翻新</h3>
-            <p>
+            <h3 data-i18n="svc1_title">厨房卫浴翻新</h3>
+            <p data-i18n="svc1_desc">
               专业定制橱柜安装、台面更换、卫浴现代化改造、防水处理，让您的厨卫焕然一新。
             </p>
           </div>
         </div>
         <div class="service-card fade-up">
           <img
-            src="./flooring-tiles.jpg"
+            src="renovation-images/flooring-tiles.jpg"
             alt="地板瓷砖铺设"
             class="service-img"
             loading="lazy"
@@ -685,15 +740,15 @@
             height="400"
           />
           <div class="service-content">
-            <h3>地板瓷砖铺设</h3>
-            <p>
+            <h3 data-i18n="svc2_title">地板瓷砖铺设</h3>
+            <p data-i18n="svc2_desc">
               精修各类实木地板、复合地板安装，专业铺设花式瓷砖、大理石，做工细腻平整。
             </p>
           </div>
         </div>
         <div class="service-card fade-up">
           <img
-            src="./interior-painting.jpg"
+            src="renovation-images/interior-painting.jpg"
             alt="室内外专业油漆"
             class="service-img"
             loading="lazy"
@@ -701,15 +756,15 @@
             height="400"
           />
           <div class="service-content">
-            <h3>室内外专业油漆</h3>
-            <p>
+            <h3 data-i18n="svc3_title">室内外专业油漆</h3>
+            <p data-i18n="svc3_desc">
               选用环保无毒优质涂料，墙面修补打磨，室内外专业喷涂与粉刷，色彩持久亮丽。
             </p>
           </div>
         </div>
         <div class="service-card fade-up">
           <img
-            src="./basement-renovation.jpg"
+            src="renovation-images/basement-renovation.jpg"
             alt="地下室精装改建"
             class="service-img"
             loading="lazy"
@@ -717,15 +772,15 @@
             height="400"
           />
           <div class="service-content">
-            <h3>地下室精装改建</h3>
-            <p>
+            <h3 data-i18n="svc4_title">地下室精装改建</h3>
+            <p data-i18n="svc4_desc">
               将闲置地下室改造成家庭影院、娱乐室、客房或独立出租单位，合理规划空间与水电。
             </p>
           </div>
         </div>
         <div class="service-card fade-up">
           <img
-            src="./windows-exterior.jpg"
+            src="renovation-images/windows-exterior.jpg"
             alt="门窗更换与外墙"
             class="service-img"
             loading="lazy"
@@ -733,15 +788,15 @@
             height="400"
           />
           <div class="service-content">
-            <h3>门窗更换与外墙</h3>
-            <p>
+            <h3 data-i18n="svc5_title">门窗更换与外墙</h3>
+            <p data-i18n="svc5_desc">
               安装节能门窗，外墙壁板更换，屋顶局部维修，庭院地砖及围栏安装维护。
             </p>
           </div>
         </div>
         <div class="service-card fade-up">
           <img
-            src="./plumbing-electrical.jpg"
+            src="renovation-images/plumbing-electrical.jpg"
             alt="水电布线与维修"
             class="service-img"
             loading="lazy"
@@ -749,8 +804,8 @@
             height="400"
           />
           <div class="service-content">
-            <h3>水电布线与维修</h3>
-            <p>
+            <h3 data-i18n="svc6_title">水电布线与维修</h3>
+            <p data-i18n="svc6_desc">
               持有专业资质，解决各类水管漏水、电路老化问题，安全第一，排查隐患。
             </p>
           </div>
@@ -760,29 +815,33 @@
 
     <!-- About -->
     <section id="about">
-      <h2 class="section-title fade-up">关于发哥装修</h2>
+      <h2 class="section-title fade-up" data-i18n="about_title">
+        关于发哥装修
+      </h2>
       <div class="about-container fade-up">
         <div class="about-text">
-          <p>
+          <p data-i18n="about_p1">
             发哥装修（Brother Fa
             Renovation）扎根于宾夕法尼亚州费城，多年来致力于为大费城及周边地区的华人社区提供最优质的房屋装修与改造服务。
           </p>
-          <p>
+          <p data-i18n="about_p2">
             无论您是想要翻新老旧的厨房卫浴、改建地下室，还是需要全屋整体装修，发哥带领的专业施工团队都能为您量身定制解决方案。我们深知在海外置业的不易，因此始终坚持<strong>"价格公道、透明报价、绝不偷工减料"</strong>的原则。
           </p>
-          <p>我们承诺为您打造一个不仅美观，更兼具实用与安全的温馨家园。</p>
+          <p data-i18n="about_p3">
+            我们承诺为您打造一个不仅美观，更兼具实用与安全的温馨家园。
+          </p>
           <div class="about-stats">
             <div class="stat-item">
-              <h4>15+</h4>
-              <p>年行业经验</p>
+              <h4>10+</h4>
+              <p data-i18n="stat_years">年行业经验</p>
             </div>
             <div class="stat-item">
-              <h4>500+</h4>
-              <p>完工项目</p>
+              <h4>200+</h4>
+              <p data-i18n="stat_projects">完工项目</p>
             </div>
             <div class="stat-item">
               <h4>100%</h4>
-              <p>客户满意度</p>
+              <p data-i18n="stat_satisfaction">客户满意度</p>
             </div>
           </div>
         </div>
@@ -791,41 +850,188 @@
 
     <!-- Contact -->
     <div class="contact-section" id="contact">
-      <h2 class="section-title fade-up">联系我们</h2>
+      <h2 class="section-title fade-up" data-i18n="contact_title">联系我们</h2>
       <div class="contact-container">
         <div class="contact-card fade-up">
           <div class="contact-icon">📞</div>
-          <h3>电话咨询</h3>
+          <h3 data-i18n="contact_phone_title">电话咨询</h3>
           <p>
             <a href="tel:+12672553842" class="phone-link">(267) 255-3842</a>
           </p>
-          <p class="sub">周一至周日 8:00 AM - 8:00 PM</p>
+          <p class="sub" data-i18n="contact_phone_hours">
+            周一至周日 8:00 AM - 8:00 PM
+          </p>
         </div>
         <div class="contact-card fade-up">
           <div class="contact-icon">💬</div>
-          <h3>微信联系</h3>
-          <p>发哥装修</p>
-          <img src="./qr-code.png" alt="扫码添加微信" class="qr-code" width="220" height="220">
-          <p class="sub">扫码添加微信联系我们</p>
+          <h3 data-i18n="contact_wechat_title">微信联系</h3>
+          <p data-i18n="contact_wechat_name">发哥装修</p>
+          <img
+            src="renovation-images/qr-code.png"
+            alt="扫码添加微信"
+            class="qr-code"
+            width="220"
+            height="220"
+          />
+          <p class="sub" data-i18n="contact_wechat_sub">扫码添加微信联系我们</p>
         </div>
         <div class="contact-card fade-up">
           <div class="contact-icon">📍</div>
-          <h3>服务区域</h3>
-          <p>大费城地区 (Philadelphia)</p>
-          <p class="sub">及周边 NJ、DE 部分地区</p>
+          <h3 data-i18n="contact_area_title">服务区域</h3>
+          <p data-i18n="contact_area_name">大费城地区 (Philadelphia)</p>
+          <p class="sub" data-i18n="contact_area_sub">及周边 NJ、DE 部分地区</p>
         </div>
       </div>
     </div>
 
     <!-- Footer -->
     <footer>
-      <p>&copy; 2026 费城发哥装修 (Brother Fa Renovation). 版权所有.</p>
+      <p data-i18n="footer">
+        &copy; 2026 费城发哥装修 (Brother Fa Renovation). 版权所有.
+      </p>
     </footer>
 
     <script>
-      const hamburger = document.getElementById("hamburger");
-      const mobileMenu = document.getElementById("mobileMenu");
-      const menuLinks = mobileMenu.querySelectorAll("a");
+      var translations = {
+        zh: {
+          logo_accent: "装修",
+          nav_home: "首页",
+          nav_services: "服务项目",
+          nav_about: "关于我们",
+          nav_contact: "联系方式",
+          hero_title: "大费城地区<br>专业房屋装修",
+          hero_subtitle:
+            "发哥装修 —— 诚信为本，手艺精湛。<br>为您打造温馨舒适的理想家园。",
+          hero_cta: "免费评估报价",
+          services_title: "我们的服务",
+          svc1_title: "厨房卫浴翻新",
+          svc1_desc:
+            "专业定制橱柜安装、台面更换、卫浴现代化改造、防水处理，让您的厨卫焕然一新。",
+          svc2_title: "地板瓷砖铺设",
+          svc2_desc:
+            "精修各类实木地板、复合地板安装，专业铺设花式瓷砖、大理石，做工细腻平整。",
+          svc3_title: "室内外专业油漆",
+          svc3_desc:
+            "选用环保无毒优质涂料，墙面修补打磨，室内外专业喷涂与粉刷，色彩持久亮丽。",
+          svc4_title: "地下室精装改建",
+          svc4_desc:
+            "将闲置地下室改造成家庭影院、娱乐室、客房或独立出租单位，合理规划空间与水电。",
+          svc5_title: "门窗更换与外墙",
+          svc5_desc:
+            "安装节能门窗，外墙壁板更换，屋顶局部维修，庭院地砖及围栏安装维护。",
+          svc6_title: "水电布线与维修",
+          svc6_desc:
+            "持有专业资质，解决各类水管漏水、电路老化问题，安全第一，排查隐患。",
+          about_title: "关于发哥装修",
+          about_p1:
+            "发哥装修（Brother Fa Renovation）扎根于宾夕法尼亚州费城，多年来致力于为大费城及周边地区的华人社区提供最优质的房屋装修与改造服务。",
+          about_p2:
+            '无论您是想要翻新老旧的厨房卫浴、改建地下室，还是需要全屋整体装修，发哥带领的专业施工团队都能为您量身定制解决方案。我们深知在海外置业的不易，因此始终坚持<strong>"价格公道、透明报价、绝不偷工减料"</strong>的原则。',
+          about_p3:
+            "我们承诺为您打造一个不仅美观，更兼具实用与安全的温馨家园。",
+          stat_years: "年行业经验",
+          stat_projects: "完工项目",
+          stat_satisfaction: "客户满意度",
+          contact_title: "联系我们",
+          contact_phone_title: "电话咨询",
+          contact_phone_hours: "周一至周日 8:00 AM - 8:00 PM",
+          contact_wechat_title: "微信联系",
+          contact_wechat_name: "发哥装修",
+          contact_wechat_sub: "扫码添加微信联系我们",
+          contact_area_title: "服务区域",
+          contact_area_name: "大费城地区 (Philadelphia)",
+          contact_area_sub: "及周边 NJ、DE 部分地区",
+          footer: "&copy; 2026 费城发哥装修 (Brother Fa Renovation). 版权所有.",
+        },
+        en: {
+          logo_accent: "Reno",
+          nav_home: "Home",
+          nav_services: "Services",
+          nav_about: "About",
+          nav_contact: "Contact",
+          hero_title: "Professional Home<br>Renovation in Philadelphia",
+          hero_subtitle:
+            "Brother Fa Renovation — Honest work, expert craftsmanship.<br>Building your dream home with care.",
+          hero_cta: "Get a Free Estimate",
+          services_title: "Our Services",
+          svc1_title: "Kitchen & Bathroom",
+          svc1_desc:
+            "Custom cabinet installation, countertop replacement, modern bathroom upgrades, and professional waterproofing to transform your space.",
+          svc2_title: "Flooring & Tile",
+          svc2_desc:
+            "Expert installation of hardwood, engineered, and laminate flooring. Professional tile and marble work with precision finishing.",
+          svc3_title: "Interior & Exterior Painting",
+          svc3_desc:
+            "Using premium eco-friendly paints. Wall repair, sanding, and professional spray & brush application for lasting results.",
+          svc4_title: "Basement Finishing",
+          svc4_desc:
+            "Convert unused basements into home theaters, entertainment rooms, guest suites, or rental units with full plumbing and electrical.",
+          svc5_title: "Windows, Doors & Siding",
+          svc5_desc:
+            "Energy-efficient window and door installation, siding replacement, roof repair, patio paving, and fence installation.",
+          svc6_title: "Plumbing & Electrical",
+          svc6_desc:
+            "Licensed professionals solving pipe leaks, outdated wiring, and all plumbing and electrical issues. Safety first.",
+          about_title: "About Brother Fa Renovation",
+          about_p1:
+            "Brother Fa Renovation is rooted in Philadelphia, Pennsylvania. For years, we have been dedicated to providing top-quality home renovation and remodeling services to the Greater Philadelphia area and surrounding communities.",
+          about_p2:
+            'Whether you want to renovate an outdated kitchen or bathroom, finish a basement, or do a complete home remodel, our professional team will create a custom solution for you. We always stand by our principles: <strong>"Fair pricing, transparent quotes, and no cutting corners."</strong>',
+          about_p3:
+            "We promise to build you a home that is not only beautiful, but also practical, safe, and comfortable.",
+          stat_years: "Years Experience",
+          stat_projects: "Projects Done",
+          stat_satisfaction: "Satisfaction",
+          contact_title: "Contact Us",
+          contact_phone_title: "Call Us",
+          contact_phone_hours: "Monday - Sunday, 8:00 AM - 8:00 PM",
+          contact_wechat_title: "WeChat",
+          contact_wechat_name: "Brother Fa Renovation",
+          contact_wechat_sub: "Scan to connect on WeChat",
+          contact_area_title: "Service Area",
+          contact_area_name: "Greater Philadelphia Area",
+          contact_area_sub: "Including parts of NJ & DE",
+          footer:
+            "&copy; 2026 Brother Fa Renovation (费城发哥装修). All rights reserved.",
+        },
+      };
+
+      var currentLang = localStorage.getItem("fa-reno-lang") || "zh";
+
+      function setLang(lang) {
+        currentLang = lang;
+        localStorage.setItem("fa-reno-lang", lang);
+        document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+        document.body.classList.toggle("lang-en", lang === "en");
+
+        var logoZh = document.querySelector(".logo-zh");
+        if (logoZh) logoZh.textContent = lang === "zh" ? "发哥" : "Brother Fa ";
+
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          var key = el.getAttribute("data-i18n");
+          if (translations[lang] && translations[lang][key]) {
+            el.innerHTML = translations[lang][key];
+          }
+        });
+
+        document.querySelectorAll("#langToggle button").forEach(function (btn) {
+          btn.classList.toggle(
+            "active",
+            btn.getAttribute("data-lang") === lang,
+          );
+        });
+      }
+
+      document
+        .getElementById("langToggle")
+        .addEventListener("click", function (e) {
+          var btn = e.target.closest("button[data-lang]");
+          if (btn) setLang(btn.getAttribute("data-lang"));
+        });
+
+      var hamburger = document.getElementById("hamburger");
+      var mobileMenu = document.getElementById("mobileMenu");
+      var menuLinks = mobileMenu.querySelectorAll("a");
 
       function toggleMenu() {
         hamburger.classList.toggle("active");
@@ -866,6 +1072,8 @@
       document.querySelectorAll(".fade-up").forEach(function (el) {
         observer.observe(el);
       });
+
+      if (currentLang !== "zh") setLang(currentLang);
     </script>
   </body>
 </html>
