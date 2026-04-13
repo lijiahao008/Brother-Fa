@@ -101,6 +101,15 @@
         align-items: center;
         gap: 4px;
         letter-spacing: -0.5px;
+        flex-wrap: wrap;
+        line-height: 1.1;
+      }
+
+      .lang-en .logo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        font-size: 1.2rem;
       }
 
       .logo span {
@@ -578,6 +587,10 @@
           font-size: 1.75rem;
         }
 
+        .lang-en .logo {
+          font-size: 1.35rem;
+        }
+
         .nav-links {
           display: flex;
         }
@@ -944,7 +957,7 @@
           footer: "&copy; 2026 费城发哥装修 (Brother Fa Renovation). 版权所有.",
         },
         en: {
-          logo_accent: "Reno",
+          logo_accent: "Renovation",
           nav_home: "Home",
           nav_services: "Services",
           nav_about: "About",
@@ -1005,7 +1018,7 @@
         document.body.classList.toggle("lang-en", lang === "en");
 
         var logoZh = document.querySelector(".logo-zh");
-        if (logoZh) logoZh.textContent = lang === "zh" ? "发哥" : "Brother Fa ";
+        if (logoZh) logoZh.textContent = lang === "zh" ? "发哥" : "Brother Fa";
 
         document.querySelectorAll("[data-i18n]").forEach(function (el) {
           var key = el.getAttribute("data-i18n");
@@ -1024,9 +1037,8 @@
 
       document
         .getElementById("langToggle")
-        .addEventListener("click", function (e) {
-          var btn = e.target.closest("button[data-lang]");
-          if (btn) setLang(btn.getAttribute("data-lang"));
+        .addEventListener("click", function () {
+          setLang(currentLang === "zh" ? "en" : "zh");
         });
 
       var hamburger = document.getElementById("hamburger");
