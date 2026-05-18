@@ -395,6 +395,7 @@
         transition:
           transform var(--transition),
           box-shadow var(--transition);
+        cursor: pointer;
       }
 
       .service-card:active {
@@ -422,6 +423,218 @@
         color: var(--text-light);
         font-size: 0.95rem;
         line-height: 1.7;
+      }
+
+      /* ── Modal ── */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 2000;
+        background: rgba(0, 0, 0, 0.85);
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      .modal-overlay.open {
+        display: flex;
+      }
+
+      .modal {
+        background: var(--white);
+        border-radius: var(--radius);
+        max-width: 800px;
+        width: 100%;
+        max-height: 90vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        animation: modalIn 0.3s ease;
+      }
+
+      @keyframes modalIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95) translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 10;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.5);
+        border: none;
+        color: var(--white);
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background var(--transition);
+        line-height: 1;
+      }
+
+      .modal-close:hover {
+        background: rgba(0, 0, 0, 0.75);
+      }
+
+      .modal-gallery {
+        position: relative;
+        background: #000;
+        flex-shrink: 0;
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .modal-gallery-track {
+        display: flex;
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      .modal-gallery-slide {
+        width: 100%;
+        flex-shrink: 0;
+      }
+
+      .modal-gallery-slide img {
+        width: 100%;
+        height: 400px;
+        object-fit: contain;
+        display: block;
+        background: #000;
+      }
+
+      .modal-gallery-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 5;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.95);
+        border: none;
+        color: var(--primary);
+        font-size: 1.4rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all var(--transition);
+        line-height: 1;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+        opacity: 0.85;
+      }
+
+      .modal-gallery-btn:hover {
+        opacity: 1;
+        background: var(--white);
+        transform: translateY(-50%) scale(1.08);
+      }
+
+      .modal-gallery-btn:active {
+        transform: translateY(-50%) scale(0.95);
+      }
+
+      .modal-gallery-prev {
+        left: 8px;
+      }
+
+      .modal-gallery-next {
+        right: 8px;
+      }
+
+      .modal-gallery::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.4));
+        pointer-events: none;
+        z-index: 3;
+      }
+
+      .modal-gallery-dots {
+        position: absolute;
+        bottom: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+        z-index: 6;
+      }
+
+      .modal-gallery-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transition: all var(--transition);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      }
+
+      .modal-gallery-dot.active {
+        background: var(--white);
+        transform: scale(1.25);
+      }
+
+      .modal-counter {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.5);
+        color: var(--white);
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 12px;
+        letter-spacing: 0.5px;
+      }
+
+      .modal-body {
+        padding: 1.5rem;
+        overflow-y: auto;
+      }
+
+      .modal-body h2 {
+        color: var(--primary);
+        font-size: 1.35rem;
+        margin-bottom: 0.75rem;
+        font-weight: 700;
+      }
+
+      .modal-body p {
+        color: var(--text-light);
+        font-size: 0.95rem;
+        line-height: 1.8;
+      }
+
+      @media (min-width: 640px) {
+        .modal-gallery-slide img {
+          height: 480px;
+          object-fit: contain;
+        }
+
+        .modal-body {
+          padding: 2rem;
+        }
       }
 
       /* ── About ── */
@@ -604,8 +817,9 @@
 
       /* ── Desktop (>=1024px) ── */
       @media (min-width: 1024px) {
-        .nav-container {
-          padding: 1rem 2rem;
+        .modal-gallery-slide img {
+          height: 560px;
+          object-fit: contain;
         }
 
         .logo {
@@ -678,6 +892,10 @@
 
         .contact-section {
           padding: 5rem 2rem;
+        }
+
+        .modal-gallery-slide img {
+          height: 560px;
         }
       }
     </style>
@@ -757,25 +975,41 @@
         我们的服务
       </h2>
       <div class="services-grid">
-        <div class="service-card fade-up">
+        <div class="service-card fade-up" data-service="0">
           <img
-            src="./kitchen-bathroom.jpg"
-            alt="厨房卫浴翻新"
+            src="./kitchen-01.jpg"
+            alt="厨房翻新"
             class="service-img"
             loading="lazy"
             width="800"
             height="400"
           />
           <div class="service-content">
-            <h3 data-i18n="svc1_title">厨房卫浴翻新</h3>
+            <h3 data-i18n="svc1_title">厨房翻新</h3>
             <p data-i18n="svc1_desc">
-              专业定制橱柜安装、台面更换、卫浴现代化改造、防水处理，让您的厨卫焕然一新。
+              专业定制橱柜安装、台面更换，让您的厨房焕然一新。
             </p>
           </div>
         </div>
-        <div class="service-card fade-up">
+        <div class="service-card fade-up" data-service="1">
           <img
-            src="./flooring-tiles.jpg"
+            src="./bathroom-01.jpg"
+            alt="卫浴翻新"
+            class="service-img"
+            loading="lazy"
+            width="800"
+            height="400"
+          />
+          <div class="service-content">
+            <h3 data-i18n="svc2_title">卫浴翻新</h3>
+            <p data-i18n="svc2_desc">
+              卫浴现代化改造、防水处理、洁具安装，打造舒适卫浴空间。
+            </p>
+          </div>
+        </div>
+        <div class="service-card fade-up" data-service="2">
+          <img
+            src="./flooring-01.webp"
             alt="地板瓷砖铺设"
             class="service-img"
             loading="lazy"
@@ -783,15 +1017,15 @@
             height="400"
           />
           <div class="service-content">
-            <h3 data-i18n="svc2_title">地板瓷砖铺设</h3>
-            <p data-i18n="svc2_desc">
+            <h3 data-i18n="svc3_title">地板瓷砖铺设</h3>
+            <p data-i18n="svc3_desc">
               精修各类实木地板、复合地板安装，专业铺设花式瓷砖、大理石，做工细腻平整。
             </p>
           </div>
         </div>
-        <div class="service-card fade-up">
+        <div class="service-card fade-up" data-service="3">
           <img
-            src="./interior-painting.jpg"
+            src="./painting-01.webp"
             alt="室内外专业油漆"
             class="service-img"
             loading="lazy"
@@ -799,15 +1033,15 @@
             height="400"
           />
           <div class="service-content">
-            <h3 data-i18n="svc3_title">室内外专业油漆</h3>
-            <p data-i18n="svc3_desc">
+            <h3 data-i18n="svc4_title">室内外专业油漆</h3>
+            <p data-i18n="svc4_desc">
               选用环保无毒优质涂料，墙面修补打磨，室内外专业喷涂与粉刷，色彩持久亮丽。
             </p>
           </div>
         </div>
-        <div class="service-card fade-up">
+        <div class="service-card fade-up" data-service="4">
           <img
-            src="./basement-renovation.jpg"
+            src="./basement-01.jpg"
             alt="地下室精装改建"
             class="service-img"
             loading="lazy"
@@ -815,15 +1049,15 @@
             height="400"
           />
           <div class="service-content">
-            <h3 data-i18n="svc4_title">地下室精装改建</h3>
-            <p data-i18n="svc4_desc">
+            <h3 data-i18n="svc5_title">地下室精装改建</h3>
+            <p data-i18n="svc5_desc">
               将闲置地下室改造成家庭影院、娱乐室、客房或独立出租单位，合理规划空间与水电。
             </p>
           </div>
         </div>
-        <div class="service-card fade-up">
+        <div class="service-card fade-up" data-service="5">
           <img
-            src="./windows-exterior.jpg"
+            src="./window-01.webp"
             alt="门窗更换与外墙"
             class="service-img"
             loading="lazy"
@@ -831,25 +1065,9 @@
             height="400"
           />
           <div class="service-content">
-            <h3 data-i18n="svc5_title">门窗更换与外墙</h3>
-            <p data-i18n="svc5_desc">
-              安装节能门窗，外墙壁板更换，屋顶局部维修，庭院地砖及围栏安装维护。
-            </p>
-          </div>
-        </div>
-        <div class="service-card fade-up">
-          <img
-            src="./plumbing-electrical.jpg"
-            alt="水电布线与维修"
-            class="service-img"
-            loading="lazy"
-            width="800"
-            height="400"
-          />
-          <div class="service-content">
-            <h3 data-i18n="svc6_title">水电布线与维修</h3>
+            <h3 data-i18n="svc6_title">门窗更换与外墙</h3>
             <p data-i18n="svc6_desc">
-              持有专业资质，解决各类水管漏水、电路老化问题，安全第一，排查隐患。
+              安装节能门窗，外墙壁板更换，屋顶局部维修，庭院地砖及围栏安装维护。
             </p>
           </div>
         </div>
@@ -934,6 +1152,24 @@
       </p>
     </footer>
 
+    <!-- Modal -->
+    <div class="modal-overlay" id="serviceModal">
+      <div class="modal">
+        <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+        <div class="modal-gallery">
+          <div class="modal-gallery-track" id="modalGalleryTrack"></div>
+          <button class="modal-gallery-btn modal-gallery-prev" id="modalGalleryPrev" aria-label="Previous photo">‹</button>
+          <button class="modal-gallery-btn modal-gallery-next" id="modalGalleryNext" aria-label="Next photo">›</button>
+          <div class="modal-gallery-dots" id="modalGalleryDots"></div>
+          <div class="modal-counter" id="modalCounter"></div>
+        </div>
+        <div class="modal-body">
+          <h2 id="modalTitle"></h2>
+          <p id="modalDesc"></p>
+        </div>
+      </div>
+    </div>
+
     <script>
       var translations = {
         zh: {
@@ -947,24 +1183,24 @@
             "发哥装修 —— 诚信为本，手艺精湛。<br>为您打造温馨舒适的理想家园。",
           hero_cta: "免费评估报价",
           services_title: "我们的服务",
-          svc1_title: "厨房卫浴翻新",
+          svc1_title: "厨房翻新",
           svc1_desc:
-            "专业定制橱柜安装、台面更换、卫浴现代化改造、防水处理，让您的厨卫焕然一新。",
-          svc2_title: "地板瓷砖铺设",
+            "专业定制橱柜安装、台面更换，让您的厨房焕然一新。",
+          svc2_title: "卫浴翻新",
           svc2_desc:
-            "精修各类实木地板、复合地板安装，专业铺设花式瓷砖、大理石，做工细腻平整。",
-          svc3_title: "室内外专业油漆",
+            "卫浴现代化改造、防水处理、洁具安装，打造舒适卫浴空间。",
+          svc3_title: "地板瓷砖铺设",
           svc3_desc:
-            "选用环保无毒优质涂料，墙面修补打磨，室内外专业喷涂与粉刷，色彩持久亮丽。",
-          svc4_title: "地下室精装改建",
+            "精修各类实木地板、复合地板安装，专业铺设花式瓷砖、大理石，做工细腻平整。",
+          svc4_title: "室内外专业油漆",
           svc4_desc:
-            "将闲置地下室改造成家庭影院、娱乐室、客房或独立出租单位，合理规划空间与水电。",
-          svc5_title: "门窗更换与外墙",
+            "选用环保无毒优质涂料，墙面修补打磨，室内外专业喷涂与粉刷，色彩持久亮丽。",
+          svc5_title: "地下室精装改建",
           svc5_desc:
-            "安装节能门窗，外墙壁板更换，屋顶局部维修，庭院地砖及围栏安装维护。",
-          svc6_title: "水电布线与维修",
+            "将闲置地下室改造成家庭影院、娱乐室、客房或独立出租单位，合理规划空间与水电。",
+          svc6_title: "门窗更换与外墙",
           svc6_desc:
-            "持有专业资质，解决各类水管漏水、电路老化问题，安全第一，排查隐患。",
+            "安装节能门窗，外墙壁板更换，屋顶局部维修，庭院地砖及围栏安装维护。",
           about_title: "关于发哥装修",
           about_p1:
             "发哥装修（Brother Fa Renovation）扎根于宾夕法尼亚州费城，多年来致力于为大费城及周边地区的华人社区提供最优质的房屋装修与改造服务。",
@@ -997,24 +1233,24 @@
             "Brother Fa Renovation — Honest work, expert craftsmanship.<br>Building your dream home with care.",
           hero_cta: "Get a Free Estimate",
           services_title: "Our Services",
-          svc1_title: "Kitchen & Bathroom",
+          svc1_title: "Kitchen Renovation",
           svc1_desc:
-            "Custom cabinet installation, countertop replacement, modern bathroom upgrades, and professional waterproofing to transform your space.",
-          svc2_title: "Flooring & Tile",
+            "Custom cabinet installation, countertop replacement, and complete kitchen remodeling to transform your cooking space.",
+          svc2_title: "Bathroom Renovation",
           svc2_desc:
-            "Expert installation of hardwood, engineered, and laminate flooring. Professional tile and marble work with precision finishing.",
-          svc3_title: "Interior & Exterior Painting",
+            "Modern bathroom upgrades, waterproofing, and fixture installation for a comfortable bathroom space.",
+          svc3_title: "Flooring & Tile",
           svc3_desc:
-            "Using premium eco-friendly paints. Wall repair, sanding, and professional spray & brush application for lasting results.",
-          svc4_title: "Basement Finishing",
+            "Expert installation of hardwood, engineered, and laminate flooring. Professional tile and marble work with precision finishing.",
+          svc4_title: "Interior & Exterior Painting",
           svc4_desc:
-            "Convert unused basements into home theaters, entertainment rooms, guest suites, or rental units with full plumbing and electrical.",
-          svc5_title: "Windows, Doors & Siding",
+            "Using premium eco-friendly paints. Wall repair, sanding, and professional spray & brush application for lasting results.",
+          svc5_title: "Basement Finishing",
           svc5_desc:
-            "Energy-efficient window and door installation, siding replacement, roof repair, patio paving, and fence installation.",
-          svc6_title: "Plumbing & Electrical",
+            "Convert unused basements into home theaters, entertainment rooms, guest suites, or rental units with full plumbing and electrical.",
+          svc6_title: "Windows, Doors & Siding",
           svc6_desc:
-            "Licensed professionals solving pipe leaks, outdated wiring, and all plumbing and electrical issues. Safety first.",
+            "Energy-efficient window and door installation, siding replacement, roof repair, patio paving, and fence installation.",
           about_title: "About Brother Fa Renovation",
           about_p1:
             "Brother Fa Renovation is rooted in Philadelphia, Pennsylvania. For years, we have been dedicated to providing top-quality home renovation and remodeling services to the Greater Philadelphia area and surrounding communities.",
@@ -1114,6 +1350,197 @@
       document.querySelectorAll(".fade-up").forEach(function (el) {
         observer.observe(el);
       });
+
+      // ── Gallery data ──
+      var serviceGalleries = [
+        {
+          images: [
+            "./kitchen-01.jpg",
+            "./kitchen-02.jpg",
+            "./kitchen-03.jpg",
+            "./kitchen-04.jpg",
+            "./kitchen-05.jpeg",
+            "./kitchen-06.jpg",
+            "./kitchen-07.jpg",
+            "./kitchen-09.png",
+            "./kitchen-10.jpeg",
+            "./kitchen-11.jpeg",
+            "./kitchen-12.jpg",
+          ],
+        },
+        {
+          images: [
+            "./bathroom-01.jpg",
+            "./bathroom-02.jpg",
+            "./bathroom-03.png",
+            "./bathroom-04.jpeg",
+            "./bathroom-05.webp",
+            "./bathroom-06.webp",
+            "./bathroom-07.webp",
+            "./bathroom-08.webp",
+          ],
+        },
+        {
+          images: [
+            "./flooring-01.webp",
+            "./flooring-02.jpg",
+            "./flooring-03.jpg",
+            "./flooring-04.jpg",
+            "./flooring-05.jpeg",
+          ],
+        },
+        {
+          images: [
+            "./painting-01.webp",
+            "./painting-02.jpg",
+            "./painting-03.jpeg",
+            "./painting-04.jpeg",
+          ],
+        },
+        {
+          images: [
+            "./basement-01.jpg",
+            "./basement-02.jpg",
+            "./basement-03.jpg",
+            "./basement-05.webp",
+          ],
+        },
+        {
+          images: [
+            "./window-01.webp",
+            "./window-02.jpeg",
+            "./window-03.jpg",
+            "./window-04.jpeg",
+            "./window-05.webp",
+            "./window-06.webp",
+            "./window-07.jpeg",
+          ],
+        },
+      ];
+
+      // ── Modal ──
+      (function () {
+        var overlay = document.getElementById("serviceModal");
+        var closeBtn = document.getElementById("modalClose");
+        var galleryTrack = document.getElementById("modalGalleryTrack");
+        var galleryDots = document.getElementById("modalGalleryDots");
+        var galleryPrev = document.getElementById("modalGalleryPrev");
+        var galleryNext = document.getElementById("modalGalleryNext");
+        var modalTitle = document.getElementById("modalTitle");
+        var modalDesc = document.getElementById("modalDesc");
+        var modalCounter = document.getElementById("modalCounter");
+        var galleryIndex = 0;
+        var totalGallerySlides = 0;
+
+        function openModal(serviceIndex) {
+          var gallery = serviceGalleries[serviceIndex];
+          if (!gallery) return;
+
+          galleryIndex = 0;
+          totalGallerySlides = gallery.images.length;
+
+          galleryTrack.style.transform = "translateX(0)";
+
+          modalTitle.textContent = document.querySelector(
+            '.service-card[data-service="' + serviceIndex + '"] h3'
+          ).textContent;
+          modalDesc.textContent = document.querySelector(
+            '.service-card[data-service="' + serviceIndex + '"] p'
+          ).textContent;
+
+          galleryTrack.innerHTML = "";
+          galleryDots.innerHTML = "";
+
+          gallery.images.forEach(function (src, i) {
+            var slide = document.createElement("div");
+            slide.className = "modal-gallery-slide";
+            var img = document.createElement("img");
+            img.src = src;
+            img.alt = modalTitle.textContent + " photo " + (i + 1);
+            slide.appendChild(img);
+            galleryTrack.appendChild(slide);
+
+            var preloader = new Image();
+            preloader.src = src;
+
+            var dot = document.createElement("button");
+            dot.className = "modal-gallery-dot" + (i === 0 ? " active" : "");
+            dot.setAttribute("aria-label", "Go to photo " + (i + 1));
+            dot.addEventListener("click", (function (idx) {
+              return function () { goToGallery(idx); };
+            })(i));
+            galleryDots.appendChild(dot);
+          });
+
+          updateCounter();
+          overlay.classList.add("open");
+          document.body.style.overflow = "hidden";
+          updateGalleryButtons();
+        }
+
+        function closeModal() {
+          overlay.classList.remove("open");
+          document.body.style.overflow = "";
+        }
+
+        function goToGallery(index) {
+          if (index < 0) index = totalGallerySlides - 1;
+          if (index >= totalGallerySlides) index = 0;
+          galleryIndex = index;
+          var container = galleryTrack.parentElement;
+          var slideWidth = container.offsetWidth;
+          galleryTrack.style.transform =
+            "translateX(-" + (index * slideWidth) + "px)";
+          galleryDots.querySelectorAll(".modal-gallery-dot").forEach(function (d, i) {
+            d.classList.toggle("active", i === index);
+          });
+          updateGalleryButtons();
+          updateCounter();
+        }
+
+        function updateGalleryButtons() {
+          galleryPrev.style.display = totalGallerySlides > 1 ? "flex" : "none";
+          galleryNext.style.display = totalGallerySlides > 1 ? "flex" : "none";
+        }
+
+        function updateCounter() {
+          if (totalGallerySlides > 1) {
+            modalCounter.textContent = (galleryIndex + 1) + " / " + totalGallerySlides;
+            modalCounter.style.display = "block";
+          } else {
+            modalCounter.style.display = "none";
+          }
+        }
+
+        closeBtn.addEventListener("click", closeModal);
+        overlay.addEventListener("click", function (e) {
+          if (e.target === overlay) closeModal();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (!overlay.classList.contains("open")) return;
+          if (e.key === "Escape") {
+            closeModal();
+          } else if (e.key === "ArrowLeft") {
+            goToGallery(galleryIndex - 1);
+          } else if (e.key === "ArrowRight") {
+            goToGallery(galleryIndex + 1);
+          }
+        });
+
+        galleryPrev.addEventListener("click", function () {
+          goToGallery(galleryIndex - 1);
+        });
+        galleryNext.addEventListener("click", function () {
+          goToGallery(galleryIndex + 1);
+        });
+
+        document.querySelectorAll(".service-card").forEach(function (card) {
+          card.addEventListener("click", function () {
+            var idx = parseInt(this.getAttribute("data-service"), 10);
+            openModal(idx);
+          });
+        });
+      })();
 
       if (currentLang !== "zh") setLang(currentLang);
     </script>
